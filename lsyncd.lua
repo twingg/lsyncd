@@ -1104,6 +1104,8 @@ local Combiner = ( function
 					else
 						return 'replace'
 					end
+				else
+					return result
 				end
 			end
 

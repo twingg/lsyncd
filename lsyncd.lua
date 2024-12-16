@@ -1956,7 +1956,7 @@ local InletFactory = ( function
 			then
 				for _, entry in ipairs( sync.filters.list )
 				do
-					e[ en ] = entry.rule .. ' ' .. entry.pattern;
+					e[ en ] = entry.rule .. entry.modifiers .. ' ' .. entry.pattern;
 					en = en + 1;
 				end
 			end
@@ -2395,7 +2395,7 @@ local Filters = ( function
 		self,    -- the filters object
 		line     -- filter line
 	)
-		local rule, pattern = string.match( line, '%s*([+|-])%s*(.*)' )
+		local rule, modifiers, pattern = string.match( line, '%s*([+|-])([r|s]*)%s*(.*)' )
 
 		if not rule or not pattern
 		then
@@ -2405,7 +2405,7 @@ local Filters = ( function
 
 		local lp = toLuaPattern( pattern )
 
-		table.insert( self. list, { rule = rule, pattern = pattern, lp = lp } )
+		table.insert( self. list, { rule = rule, modifiers = modifiers, pattern = pattern, lp = lp } )
 	end
 
 	--
